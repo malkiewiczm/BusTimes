@@ -68,7 +68,7 @@ SET[ \t]ALTERNATE[\t ]IN {
 	ALT = true;
 }
 SET[ \t]ALTERNATE[\t ]OUT {
-	IN = true;
+	IN = false;
 	ALT = true;
 }
 AM {
@@ -117,11 +117,13 @@ static bool outbound_cmp(const triplet &lhs, const triplet &rhs)
 	return lhs.t0 < rhs.t0;
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	yylex();
-	std::sort(inbound.begin(), inbound.end(), inbound_cmp);
-	std::sort(outbound.begin(), outbound.end(), outbound_cmp);
+	if (argc == 1) {
+		std::sort(inbound.begin(), inbound.end(), inbound_cmp);
+		std::sort(outbound.begin(), outbound.end(), outbound_cmp);
+	}
 	puts("-------");
 	puts("INBOUND");
 	puts("-------");
