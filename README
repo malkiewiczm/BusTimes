@@ -1,0 +1,22 @@
+This aggregates the bus schedules using a small parser written in lex.
+
+Compile with "make all", run with "make run" -- see makefile for
+details.
+
+List of schedule commands:
+
+ROUTE -- sets the route number
+
+SET IN -- sets times to inbound side
+
+SET OUT -- sets times to outbound side
+
+SET ALTERNATE IN/OUT -- alternates the sides, starting immediately
+with IN or OUT (whichever is specified)
+
+AM -- sets times to morning
+
+PM -- sets times to evening (the only thing this changes is that it
+adds +12 to the hour)
+
+Look at the supplied routes for more details / examples.
