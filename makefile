@@ -2,11 +2,12 @@ MAKEFLAGS += Rr
 CC := g++
 CFLAGS := -std=c++11 -Ofast -march=native
 #LDLIBS := -lfl
+LDLIBS :=
 
 all: lex.yy.c
 	$(CC) $(CFLAGS) $(LDLIBS) $< -o $@
 
-lex.yy.c: test.l
+lex.yy.c: main.l
 	lex $<
 
 .PHONY: clean run

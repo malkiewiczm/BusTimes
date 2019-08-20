@@ -33,14 +33,14 @@ struct triplet {
 	triplet() = default;
 	triplet(const time_entry &a, const time_entry &b, const time_entry &c)
 		: t0(a), t1(b), t2(c), route(ROUTE) {}
-	void print() const {
+	void print(char terminator) const {
 		printf("[%3d] ", route);
 		t0.print();
 		putchar(' ');
 		t1.print();
 		putchar(' ');
 		t2.print();
-		putchar('\n');
+		putchar(terminator);
 	}
 };
 
@@ -124,17 +124,28 @@ int main(int argc, char **argv)
 		std::sort(inbound.begin(), inbound.end(), inbound_cmp);
 		std::sort(outbound.begin(), outbound.end(), outbound_cmp);
 	}
-	puts("-------");
-	puts("INBOUND");
-	puts("-------");
-	for (auto item : inbound) {
-		item.print();
-	}
-	puts("--------");
-	puts("OUTBOUND");
-	puts("--------");
-	for (auto item : outbound) {
-		item.print();
+	puts("-----------------------------------------------");
+	puts("INBOUND                 OUTBOUND");
+	puts("-----------------------------------------------");
+	if (inbound.size() > outbound.size()) {
+		size_t i;
+		for (i = 0; i < outbound.size(); ++i) {
+			inbound[i].print(' ');
+			outbound[i].print('\n');
+		}
+		for ( ; i < inbound.size(); ++i) {
+			inbound[i].print('\n');
+		}
+	} else {
+		size_t i;
+		for (i = 0; i < inbound.size(); ++i) {
+			inbound[i].print(' ');
+			outbound[i].print('\n');
+		}
+		for ( ; i < outbound.size(); ++i) {
+			printf("                        ");
+			outbound[i].print('\n');
+		}
 	}
 	return 0;
 }
